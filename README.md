@@ -19,3 +19,7 @@ The view represents the interface the user interacts with, and uses the controll
 
 
 ![class diagram](docs/images/classe.png)
+
+![class diagram](docs/images/init.png)
+
+![class diagram](docs/images/changeColor.png)
