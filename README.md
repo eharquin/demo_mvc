@@ -15,3 +15,7 @@ The model stores the application state, in this case mostly the color name.
 
 ### View
 The view represents the interface the user interacts with, and uses the controller to update data.
+
+
+
+![class diagram](docs/images/classe.png)
