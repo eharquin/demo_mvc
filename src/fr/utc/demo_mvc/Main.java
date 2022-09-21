@@ -15,8 +15,7 @@ public class Main{
 
 		Controller controller = new Controller(model);
 
-		View view = new View(nameColorMap.keySet().toArray(new String[0]));
-		view.addController(controller);
+		View view = new View(controller, nameColorMap.keySet().toArray(new String[0]));
 
 		model.addPropertyChangeListener(view);
 

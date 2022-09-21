@@ -11,15 +11,15 @@ public class View extends JFrame implements PropertyChangeListener{
 	private static final long serialVersionUID = 1234567L;
 
 	private JPanel panel;
-	private JList<String> list;
 
-	public View(String[] colors){
+	public View(Controller controller, String[] colors){
 
 		this.setLayout(new GridLayout(1,2));
 
-		this.list = new JList<String>(colors);
+		JList<String> list = new JList<String>(colors);
+		list.addListSelectionListener(controller);
 
-		JScrollPane dropdownList = new JScrollPane(this.list);
+		JScrollPane dropdownList = new JScrollPane(list);
 		dropdownList.setPreferredSize(new Dimension(300,300));
 		this.add(dropdownList);
 
@@ -28,11 +28,6 @@ public class View extends JFrame implements PropertyChangeListener{
 		this.add(panel);
 
 		this.pack();
-	}
-
-	public void addController(Controller controller)
-	{
-		list.addListSelectionListener(controller);
 	}
 
 	public void propertyChange(PropertyChangeEvent evt) {
