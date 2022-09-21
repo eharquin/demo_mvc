@@ -4,34 +4,43 @@ import java.util.*;
 import java.beans.*;
 import java.awt.Color;
 
-public class Model{
+/**
+ * The model will store data and update the view when changing.
+ */
+public class Model {
 
-	private PropertyChangeSupport support;
+    private PropertyChangeSupport support;
+    private Map<String, Color> nameColorMap;
 
-	private String selectedColorName;
-	private Color selectedColor;
-	private Map<String, Color> nameColorMap;
+    public Model(Map<String, Color> nameColorMap) {
+        this.support = new PropertyChangeSupport(this);
+        this.nameColorMap = nameColorMap;
+    }
 
-	public Model(Map<String, Color> nameColorMap){
-		this.support = new PropertyChangeSupport(this);
-		this.nameColorMap = nameColorMap;
-	}
+    /**
+     * Set the current color and updates the UI
+     *
+     * @param colorName Color value
+     */
+    public void setColor(String colorName) {
+        Color selectedColor = this.nameColorMap.get(colorName);
+        support.firePropertyChange("selectedColor", null, selectedColor);
+    }
 
-	public String[] GetColorNameArray()
-	{
-		return nameColorMap.keySet().toArray(new String[0]);
-	}
-
-	public void setColor(String colorName){
-		this.selectedColorName = colorName;
-		this.selectedColor = this.nameColorMap.get(this.selectedColorName);
-		support.firePropertyChange("selectedColor", null, this.selectedColor);
-	}
-
-	public void addPropertyChangeListener(PropertyChangeListener pcl) {
+    /**
+     * Adds a property change listener to update the view when data changes.
+     *
+     * @param pcl Listener
+     */
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
         support.addPropertyChangeListener(pcl);
     }
 
+    /**
+     * Removes a previously set listener.
+     *
+     * @param pcl Listener
+     */
     public void removePropertyChangeListener(PropertyChangeListener pcl) {
         support.removePropertyChangeListener(pcl);
     }

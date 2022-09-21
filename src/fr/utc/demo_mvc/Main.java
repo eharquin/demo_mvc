@@ -3,22 +3,32 @@ package fr.utc.demo_mvc;
 import java.awt.*;
 import java.util.*;
 
-public class Main{
+/**
+ * Application entrypoint
+ */
+public class Main {
 
-	public static final String ressourcePath = "res/rgb.txt";
-	
-	public static void main(String[] args) {
+    /**
+     * CSV file containing colors
+     */
+    private static final String colorsFile = "res/rgb.txt";
 
-		Map<String, Color> nameColorMap = ColorFileReader.ReadColorFile(ressourcePath);
+    /**
+     * CLI application entrypoint, linking the model, view and controllers components
+     * @param args CLI arguments
+     */
+    public static void main(String[] args) {
 
-		Model model = new Model(nameColorMap);
+        Map<String, Color> nameColorMap = ColorFileReader.ReadColorFile(colorsFile);
 
-		Controller controller = new Controller(model);
+        Model model = new Model(nameColorMap);
 
-		View view = new View(controller, nameColorMap.keySet().toArray(new String[0]));
+        Controller controller = new Controller(model);
 
-		model.addPropertyChangeListener(view);
+        View view = new View(controller, nameColorMap.keySet().toArray(new String[0]));
 
-		view.setVisible(true);
-	}
+        model.addPropertyChangeListener(view);
+
+        view.setVisible(true);
+    }
 }
